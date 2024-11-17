@@ -40,12 +40,6 @@ jobs:
         echo "Showing details for the compute instance..."
         az ml compute show --name ml-vm --workspace-name azure-ml --resource-group ml-course
 
-    # Debug Step: Verify access to the compute instance (ensure the service principal or user has access)
-    - name: Verify compute access
-      run: |
-        echo "Verifying compute access..."
-        az ml job create --file src/job.yml --resource-group ml-course --workspace-name azure-ml
-
     - name: Trigger Azure ML job
       run: |
         echo "Triggering Azure ML job..."
