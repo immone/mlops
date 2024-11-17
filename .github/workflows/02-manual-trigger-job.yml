@@ -38,7 +38,7 @@ jobs:
     - name: Show compute instance details
       run: |
         echo "Showing details for the compute instance..."
-        az ml compute show --name <your-compute-instance> --workspace-name azure-ml --resource-group ml-course
+        az ml compute show --name ml-vm --workspace-name azure-ml --resource-group ml-course
 
     - name: Trigger Azure ML job
       run: |
