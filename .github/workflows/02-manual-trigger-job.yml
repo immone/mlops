@@ -10,18 +10,14 @@ jobs:
     - name: Check out repo
       uses: actions/checkout@main
 
-    - name: Install Azure CLI
-      run: |
-        curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-    - name: Install az ml extension
-      run: az extension add -n ml -y
-
     - name: Azure login
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Create Azure ML job
-      run: |
-        az ml job create --file src/job.yml --resource-group ml-course --workspace-name azure-ml
+    - name: Trigger Azure ML job
+      uses: azure/azure-ml-sdk-action@v1
+      with:
+        resource-group: ml-course
+        workspace-name: azure-ml
+        job-file: path/to/job.yml
