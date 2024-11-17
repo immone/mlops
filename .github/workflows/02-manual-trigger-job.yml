@@ -43,4 +43,4 @@ jobs:
     - name: Trigger Azure ML job
       run: |
         echo "Triggering Azure ML job..."
-        az ml job create --file src/job.yml --resource-group ml-course --workspace-name azure-ml --compute-target azureml:ml-vm
+        az ml job create --file src/job.yml --resource-group ml-course --workspace-name azure-ml --compute-target ml-vm
