@@ -17,30 +17,42 @@ jobs:
     - name: Install az ml extension
       run: az extension add -n ml -y
 
-    - name: Azure login
-      uses: azure/login@v1
+    - name: Azure CLI Login
+      uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     # Debug Step: Show the current authenticated Azure identity
     - name: Check Azure identity
-      run: |
-        echo "Checking Azure identity..."
-        az account show
-
-    # Debug Step: List available compute instances in the workspace
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          echo "Checking Azure identity..."
+          az account show
+  
     - name: List compute instances
-      run: |
-        echo "Listing available compute instances..."
-        az ml compute list --workspace-name azure-ml --resource-group ml-course
-
-    # Debug Step: Show details of the specific compute instance
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          echo "Listing available compute instances..."
+          az ml compute list --workspace-name azure-ml --resource-group ml-course
+  
     - name: Show compute instance details
-      run: |
-        echo "Showing details for the compute instance..."
-        az ml compute show --name ml-vm --workspace-name azure-ml --resource-group ml-course
-
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          echo "Showing details for the compute instance..."
+          az ml compute show --name ml-vm --workspace-name azure-ml --resource-group ml-course
+  
     - name: Trigger Azure ML job
-      run: |
-        echo "Triggering Azure ML job..."
-        az ml job create --file src/job.yml --resource-group ml-course --workspace-name azure-ml
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          echo "Triggering Azure ML job..."
+          az ml job create --file src/job.yml --resource-group ml-course --workspace-name azure-ml
