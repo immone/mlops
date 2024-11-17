@@ -20,4 +20,4 @@ jobs:
       with:
         resource-group: ml-course
         workspace-name: azure-ml
-        job-file: path/to/job.yml
+        job-file: src/job.yml
