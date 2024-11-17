@@ -34,7 +34,7 @@ jobs:
         echo "Listing available compute instances..."
         az ml compute list --workspace-name azure-ml --resource-group ml-course
 
-    # Debug Step: Show details of the specific compute instance (replace <your-compute-instance> with actual name)
+    # Debug Step: Show details of the specific compute instance
     - name: Show compute instance details
       run: |
         echo "Showing details for the compute instance..."
@@ -43,4 +43,4 @@ jobs:
     - name: Trigger Azure ML job
       run: |
         echo "Triggering Azure ML job..."
-        az ml job create --file src/job.yml --resource-group ml-course --workspace-name azure-ml --compute-target ml-vm
+        az ml job create --file src/job.yml --resource-group ml-course --workspace-name azure-ml
